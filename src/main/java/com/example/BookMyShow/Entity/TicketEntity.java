@@ -23,7 +23,9 @@ public class TicketEntity {
 
     private String allotedSeat;
     private int amount;
-    private Date bookedDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date bookedAt;
 
     @ManyToOne
     @JoinColumn(name="fk_userId")

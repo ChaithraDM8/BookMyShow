@@ -2,9 +2,7 @@ package com.example.BookMyShow.Controller;
 
 import com.example.BookMyShow.DTO.EntryDto.ShowEntry;
 import com.example.BookMyShow.DTO.ResponseDto.ShowResponseDto;
-import com.example.BookMyShow.DTO.ResponseDto.TheaterResponseDto;
-import com.example.BookMyShow.Service.ShowService;
-import com.example.BookMyShow.Service.ShowServiceImpl;
+import com.example.BookMyShow.Service.impl.ShowServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +21,7 @@ public class ShowController {
     @PostMapping("/add")
     public ShowResponseDto addShow(@RequestBody() ShowEntry showEntryDto){
 
-        log.info("Here we are");
+        log.info("from ShowController");
 
         return showService.addShow(showEntryDto);
     }

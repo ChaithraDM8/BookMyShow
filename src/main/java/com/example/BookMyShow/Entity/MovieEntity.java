@@ -1,5 +1,6 @@
 package com.example.BookMyShow.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -12,15 +13,17 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-@Table(name="Movie")
+@Table(name="Movies")
 public class MovieEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
     private String movieName;
+    @Column(columnDefinition = "DATE")
     private Date releaseDate;
 
     @OneToMany(mappedBy = "movie",cascade =CascadeType.ALL)
-   private List<ShowEntity> shows;
+    @JsonIgnore
+    private List<ShowEntity> shows;
 
 }

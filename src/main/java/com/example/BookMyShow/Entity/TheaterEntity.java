@@ -1,8 +1,10 @@
 package com.example.BookMyShow.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import com.example.BookMyShow.enums.TheaterType;
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -12,7 +14,7 @@ import java.util.List;
 @Setter
 @Builder
 @Table(name="Theatre")
-public class TheatreEntity {
+public class TheaterEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
@@ -23,9 +25,11 @@ public class TheatreEntity {
     private String city;
 
     @OneToMany(mappedBy = "theatre",cascade = CascadeType.ALL)
-    private List<TheatreSeatsEntity> theatreSeats;
+    @JsonIgnore
+    private List<TheaterSeatsEntity> theatreSeats = new ArrayList<>();;
 
     @OneToMany(mappedBy = "theatre",cascade = CascadeType.ALL)
-   private List<ShowEntity> shows;
+    @JsonIgnore
+    private List<ShowEntity> shows;
 
 }

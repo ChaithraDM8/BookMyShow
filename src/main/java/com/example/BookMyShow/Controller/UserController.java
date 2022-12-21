@@ -1,8 +1,8 @@
 package com.example.BookMyShow.Controller;
 
 import com.example.BookMyShow.DTO.EntryDto.UserEntry;
-import com.example.BookMyShow.DTO.ResponseDto.UserResposeDto;
-import com.example.BookMyShow.Service.UserServiceImpl;
+import com.example.BookMyShow.DTO.ResponseDto.UserResponseDto;
+import com.example.BookMyShow.Service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +22,9 @@ public class UserController {
         return new ResponseEntity<>("User added Succesfully", HttpStatus.CREATED);
     }
     @GetMapping("{id}")
-    public ResponseEntity<UserResposeDto> getUser(@PathVariable(value = "id")int id){
+    public ResponseEntity<UserResponseDto> getUser(@PathVariable(value = "id")int id){
 
-        UserResposeDto userResponseDto = userService.getUserById(id);
+        UserResponseDto userResponseDto = userService.getUserById(id);
         return new ResponseEntity<>(userResponseDto,HttpStatus.OK);
     }
 }

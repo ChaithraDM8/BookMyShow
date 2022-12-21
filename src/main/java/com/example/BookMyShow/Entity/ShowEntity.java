@@ -2,7 +2,8 @@ package com.example.BookMyShow.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
-import org.springframework.boot.autoconfigure.web.WebProperties;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.sql.Time;
@@ -19,10 +20,20 @@ public class ShowEntity {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
+
+    @Column(columnDefinition = "DATE")
     private Date showDate;
+
+    @Column(columnDefinition = "TIME")
     private Time showTime;
-    private Date createdDate;
-    private Time createdTime;
+
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @UpdateTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updatedAt;
 
     @OneToMany(mappedBy = "shows",cascade = CascadeType.ALL)
     @JsonIgnore
@@ -38,7 +49,7 @@ public class ShowEntity {
 
     @ManyToOne
     @JsonIgnore
-    private TheatreEntity theatre;
+    private TheaterEntity theatre;
 
 
 

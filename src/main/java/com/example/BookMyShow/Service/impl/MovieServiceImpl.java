@@ -1,4 +1,4 @@
-package com.example.BookMyShow.Service;
+package com.example.BookMyShow.Service.impl;
 
 
 
@@ -8,15 +8,17 @@ import com.example.BookMyShow.DTO.ResponseDto.MovieNameAndIdObject;
 import com.example.BookMyShow.DTO.ResponseDto.MovieResponseDto;
 import com.example.BookMyShow.Repository.MovieRepo;
 import com.example.BookMyShow.Entity.MovieEntity;
+import com.example.BookMyShow.Service.MovieService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Slf4j
 @Service
-public class MovieServiceImpl implements MovieService  {
+public class MovieServiceImpl implements MovieService {
     @Autowired
     MovieRepo movieRepo;
+
     @Override
     public MovieResponseDto addMovie(MovieEntry movieEntryDto) {
 

@@ -13,8 +13,8 @@ import java.util.Set;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class BookRequestDto {
-    int UserId;
+public class BookTicketRequestDto {
+    int userId;
     int showId;
     SeatType seatType;
     Set<String> requestedSeats;

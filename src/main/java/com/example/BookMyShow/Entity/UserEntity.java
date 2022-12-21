@@ -2,6 +2,7 @@ package com.example.BookMyShow.Entity;
 
 
 import com.example.BookMyShow.Entity.TicketEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,8 +24,8 @@ public class UserEntity {
     private String name;
     private long phNum;
 
-    @OneToMany(cascade=CascadeType.ALL)//(mappedBy = "user",cascade = CascadeType.ALL)
-    @JoinColumn
+    @OneToMany(mappedBy = "user",cascade=CascadeType.ALL)
+    @JsonIgnore
     List<TicketEntity> tickets;
 
 }

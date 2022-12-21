@@ -12,7 +12,7 @@ import java.util.Date;
 @Builder
 public class ShowEntry {
     Date showDate;
-    Time showTime;
+   Time showTime;
     MovieResponseDto movieResponseDto;
     TheaterResponseDto theaterResponseDto;
 

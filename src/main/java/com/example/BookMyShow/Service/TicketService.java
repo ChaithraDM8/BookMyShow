@@ -1,13 +1,13 @@
 package com.example.BookMyShow.Service;
 
 
-import com.example.BookMyShow.DTO.BookRequestDto;
+import com.example.BookMyShow.DTO.BookTicketRequestDto;
+import com.example.BookMyShow.DTO.ResponseDto.TicketResponseDto;
 import com.example.BookMyShow.DTO.TicketDto;
-import org.springframework.stereotype.Service;
 
 
 public interface TicketService {
-    public TicketDto addTicket(TicketDto ticketDto);
-    public TicketDto getTicketById(int id);
-    public TicketDto BookRequest(BookRequestDto bookRequestDto);
+    //public TicketDto addTicket(TicketDto ticketDto);
+    public TicketResponseDto getTicketById(int id);
+    public TicketResponseDto bookTicket(BookTicketRequestDto bookRequestDto);
 }

@@ -20,7 +20,10 @@ public class ShowSeatsEntity {
     private int id;
     private int rate;
     private String seatNum;
+
+    @Enumerated(EnumType.STRING)
     private SeatType seatType;
+
     private boolean booked;
     private Date bookedAt;
 

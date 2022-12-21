@@ -3,14 +3,18 @@ package com.example.BookMyShow.Convertor;
 import com.example.BookMyShow.DTO.EntryDto.ShowEntry;
 import com.example.BookMyShow.DTO.ResponseDto.ShowResponseDto;
 import com.example.BookMyShow.Entity.ShowEntity;
+import com.example.BookMyShow.Repository.ShowRepo;
 import lombok.experimental.UtilityClass;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @UtilityClass
 public class ShowConvertor {
+    @Autowired
+    ShowRepo showRepo;
 
     public static ShowResponseDto entityToDto(ShowEntity showEntity, ShowEntry showEntry) {
         return ShowResponseDto.builder()
-                .id(showEntity.getId())
+               .id(showEntity.getId())
                 .showDate(showEntity.getShowDate())
                 .showTime(showEntity.getShowTime())
                 .movieResponseDto(showEntry.getMovieResponseDto())
@@ -29,4 +33,7 @@ public class ShowConvertor {
                 .id(showEntity.getId())
                 .build();
     }
+
 }
+
+

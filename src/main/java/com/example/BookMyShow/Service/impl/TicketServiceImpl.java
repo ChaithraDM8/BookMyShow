@@ -1,8 +1,9 @@
-package com.example.BookMyShow.Service;
+package com.example.BookMyShow.Service.impl;
 
 
 import com.example.BookMyShow.Convertor.TicketConvertor;
-import com.example.BookMyShow.DTO.BookRequestDto;
+import com.example.BookMyShow.DTO.BookTicketRequestDto;
+import com.example.BookMyShow.DTO.ResponseDto.TicketResponseDto;
 import com.example.BookMyShow.DTO.TicketDto;
 
 import com.example.BookMyShow.Repository.ShowRepo;
@@ -13,6 +14,7 @@ import com.example.BookMyShow.Entity.ShowEntity;
 import com.example.BookMyShow.Entity.ShowSeatsEntity;
 import com.example.BookMyShow.Entity.TicketEntity;
 import com.example.BookMyShow.Entity.UserEntity;
+import com.example.BookMyShow.Service.TicketService;
 import com.example.BookMyShow.enums.SeatType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Set;
 @Service
-public class TicketServiceImpl implements TicketService{
+public class TicketServiceImpl implements TicketService {
     @Autowired
     TicketRepo ticketRepo;
 
@@ -32,21 +34,21 @@ public class TicketServiceImpl implements TicketService{
     @Autowired
     ShowRepo showRepo;
 
-    @Override
-    public TicketDto addTicket(TicketDto ticketDto) {
-        TicketEntity ticketEntity= TicketConvertor.dtoToEntity(ticketDto);
-       ticketRepo.save(ticketEntity);
-       return ticketDto;
-    }
+//    @Override
+//    public TicketDto addTicket(TicketDto ticketDto) {
+//        TicketEntity ticketEntity= TicketConvertor.dtoToEntity(ticketDto);
+//       ticketRepo.save(ticketEntity);
+//       return ticketDto;
+//    }
 
     @Override
-    public TicketDto getTicketById(int id) {
+    public TicketResponseDto getTicketById(int id) {
         TicketEntity ticketEntity =  ticketRepo.findById(id).get();
         return TicketConvertor.entityToDto(ticketEntity);
     }
 
     @Override
-    public TicketDto BookRequest(BookRequestDto bookRequestDto) {
+    public TicketResponseDto bookTicket(BookTicketRequestDto bookRequestDto) {
        UserEntity userEntity= userRepo.findById(bookRequestDto.getUserId()).get();
         ShowEntity showEntity=showRepo.findById(bookRequestDto.getShowId()).get();
         SeatType seatType=bookRequestDto.getSeatType();
@@ -62,20 +64,24 @@ public class TicketServiceImpl implements TicketService{
                 bookedSeats.add(seat);
             }
         }
+        //print the booked seats
+        for(ShowSeatsEntity seat: bookedSeats)
+            System.out.println(seat.getSeatNum());
+
         if(bookedSeats.size() != requestedSeats.size()){
             throw new Error("All Seats are not available");
         }
         TicketEntity ticketEntity=TicketEntity.builder().user(userEntity).shows(showEntity).seats(bookedSeats).build();
 
         int amount=0;
-        for(ShowSeatsEntity seat:bookedSeats){
-            seat.setBooked(true);
-            seat.setBookedAt( new Date());
-            seat.setTicket(ticketEntity);
-            amount+= seat.getRate();
+        for(ShowSeatsEntity showSeatsEntity:bookedSeats){
+            showSeatsEntity.setBooked(true);
+            showSeatsEntity.setBookedAt( new Date());
+            showSeatsEntity.setTicket(ticketEntity);
+            amount= amount+showSeatsEntity.getRate();
         }
         ticketEntity.setAmount(amount);
-        ticketEntity.setBookedDate(new Date());
+        ticketEntity.setBookedAt(new Date());
         ticketEntity.setAllotedSeat((convertListOfSeatsEntityToString(bookedSeats)));
 
         userEntity.getTickets().add(ticketEntity);
@@ -95,4 +101,6 @@ public class TicketServiceImpl implements TicketService{
         return str;
 
     }
+
+
 }

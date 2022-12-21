@@ -15,6 +15,6 @@ public class ShowDto {
     private Date showDate;
     private Time showTime;
     MovieDto movieDto;
-    TheatreDto theatreDto;
+    TheaterDto theatreDto;
 
 }

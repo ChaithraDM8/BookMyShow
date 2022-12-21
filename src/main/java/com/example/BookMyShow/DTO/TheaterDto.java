@@ -9,13 +9,13 @@ import lombok.*;
 @Getter
 @Setter
 
-public class TheatreDto {
+public class TheaterDto {
     private int id;
     private String theatreName;
     private String address;
     private String city;
     TheaterType theaterType;
 
-    //TheaterSeatsDto theaterSeatsDto;
+    TheaterSeatsDto theaterSeatsDto;
     ShowDto showDto;
 }

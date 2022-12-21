@@ -9,14 +9,11 @@ import java.util.Date;
 @Data
 @Builder
 public class ShowResponseDto {
+
     int id;
-
-   Date showDate;
-
+    Date showDate;
     Time showTime;
-
     MovieResponseDto movieResponseDto;
-
     TheaterResponseDto theaterDto;
 
 }

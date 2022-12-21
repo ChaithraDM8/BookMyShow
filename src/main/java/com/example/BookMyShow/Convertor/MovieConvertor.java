@@ -8,8 +8,8 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public class MovieConvertor {
-    public static MovieEntity dtoToEntity(MovieEntry movieDto){
-        return MovieEntity.builder().movieName(movieDto.getMovieName()).releaseDate(movieDto.getReleaseDate()).build();
+    public static MovieEntity dtoToEntity(MovieEntry movieEntry){
+        return MovieEntity.builder().movieName(movieEntry.getMovieName()).releaseDate(movieEntry.getReleaseDate()).build();
     }
     public static MovieResponseDto entityToDto(MovieEntity movieEntity){
         return MovieResponseDto.builder().id(movieEntity.getId()).movieName(movieEntity.getMovieName()).releaseDate(movieEntity.getReleaseDate()).build();

@@ -1,12 +1,8 @@
 package com.example.BookMyShow.Controller;
 
 import com.example.BookMyShow.DTO.EntryDto.TheatreEntry;
-import com.example.BookMyShow.DTO.EntryDto.UserEntry;
 import com.example.BookMyShow.DTO.ResponseDto.TheaterResponseDto;
-import com.example.BookMyShow.DTO.ResponseDto.UserResposeDto;
-import com.example.BookMyShow.DTO.TheatreDto;
-import com.example.BookMyShow.Service.TheatreService;
-import com.example.BookMyShow.Service.TheatreServiceImpl;
+import com.example.BookMyShow.Service.impl.TheaterServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class TheatreController {
 
     @Autowired
-    TheatreServiceImpl theatreService;
+    TheaterServiceImpl theatreService;
 
     @PostMapping("/add")
     public ResponseEntity<String> addUser (@RequestBody TheatreEntry theatreEntryDto){

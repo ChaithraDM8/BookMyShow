@@ -9,12 +9,16 @@ import com.example.BookMyShow.Entity.TheaterEntity;
 import com.example.BookMyShow.Entity.TheaterSeatsEntity;
 import com.example.BookMyShow.Service.TheaterService;
 import com.example.BookMyShow.enums.SeatType;
+import com.example.BookMyShow.enums.TheaterType;
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 @Service
+@Slf4j
 public class TheaterServiceImpl implements TheaterService {
 
     @Autowired
@@ -34,7 +38,10 @@ public class TheaterServiceImpl implements TheaterService {
             theatreSeat.setTheatre(theaterEntity);
         }
 
-       // theaterEntity.setTheaterType(TheaterType.SINGLE);
+      //
+        //  theaterEntity.setTheaterType(TheaterType.SINGLE);
+        log.info("The theater entity is "+ theaterEntity);
+
         theaterEntity=theatreRepo.save(theaterEntity);
         theatreSeatsRepo.saveAll(theatreSeats);
         return TheatreConvertor.entityToDto(theaterEntity);

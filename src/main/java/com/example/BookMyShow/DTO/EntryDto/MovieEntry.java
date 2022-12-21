@@ -9,6 +9,6 @@ import java.util.Date;
 @Data
 @Builder
 public class MovieEntry {
-    String movieName;
+     String movieName;
        Date releaseDate;
 }

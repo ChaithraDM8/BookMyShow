@@ -11,11 +11,14 @@ import com.example.BookMyShow.Repository.ShowRepo;
 import com.example.BookMyShow.Repository.ShowSeatsRepo;
 import com.example.BookMyShow.Repository.TheaterRepo;
 import com.example.BookMyShow.Service.ShowService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+@Slf4j
 @Service
 public class ShowServiceImpl implements ShowService {
 
@@ -33,6 +36,7 @@ public class ShowServiceImpl implements ShowService {
 
     @Override
     public ShowResponseDto addShow(ShowEntry showEntry) {
+        log.info("from ShowControllerimpli");
         ShowEntity showEntity = ShowConvertor.dtoToEntity(showEntry);
         // adding movie to the show
         MovieEntity movieEntity = movieRepo.findById(showEntry.getMovieResponseDto().getId()).get();
@@ -46,9 +50,7 @@ public class ShowServiceImpl implements ShowService {
         List<ShowSeatsEntity> showSeatsEntity = createShowSeatsEntity(theatreEntity.getTheatreSeats(), showEntity);
 
         showSeatsRepo.saveAll(showSeatsEntity);
-
         ShowResponseDto showResponseDto = ShowConvertor.entityToDto(showEntity, showEntry);
-
 
        return showResponseDto;
     }
@@ -60,10 +62,11 @@ public class ShowServiceImpl implements ShowService {
         for (TheaterSeatsEntity seat : theatreSeats) {
 
             ShowSeatsEntity showSeatsEntity=ShowSeatsEntity.builder()
-                    .id(seat.getId())
+                   // .id(seat.getId())
                     .seatNum(seat.getSeatNum())
                     .rate(seat.getRate())
                     .seatType(seat.getSeatType())
+                    .bookedAt(new Date())
                    // .show(showEntity)
                     .build();
 
@@ -73,6 +76,7 @@ public class ShowServiceImpl implements ShowService {
         for (ShowSeatsEntity showSeatsEntity : showSeats) {
             showSeatsEntity.setShow(showEntity);
         }
+
         showEntity.setShowSeats(showSeats);
         return showSeats;
     }

@@ -87,8 +87,13 @@ public class TicketServiceImpl implements TicketService {
         userEntity.getTickets().add(ticketEntity);
         showEntity.getTickets().add(ticketEntity);
 
-        ticketRepo.save(ticketEntity);
-        return TicketConvertor.entityToDto(ticketEntity);
+       ticketRepo.save(ticketEntity);
+        TicketResponseDto ticketResponseDto = TicketConvertor.entityToDto(ticketEntity);
+
+        //ticketResponseDto.setMovieName(showEntity.getMovie().getMovieName());
+        //ticketResponseDto.setUserName(userEntity.getName());
+
+        return ticketResponseDto;
     }
     public String convertListOfSeatsEntityToString(List<ShowSeatsEntity> bookedSeats){
 

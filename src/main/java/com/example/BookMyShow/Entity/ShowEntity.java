@@ -21,10 +21,10 @@ public class ShowEntity {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int id;
 
-    @Column(columnDefinition = "DATE")
+    @Column(columnDefinition = "DATE", nullable = false)
     private Date showDate;
 
-    @Column(columnDefinition = "TIME")
+    @Column(columnDefinition = "TIME", nullable = false)
     private Time showTime;
 
     @CreationTimestamp
